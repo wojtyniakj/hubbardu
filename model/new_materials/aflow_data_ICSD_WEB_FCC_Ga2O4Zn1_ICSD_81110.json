@@ -1,0 +1,580 @@
+{
+    "compound": "Ga4O8Zn2",
+    "ldau": "3.9,0,7.5",
+    "species": [
+        "Ga",
+        "O",
+        "Zn"
+    ],
+    "geometry": [
+        5.910023,
+        5.910023,
+        5.910023,
+        60.0,
+        60.0,
+        60.0
+    ],
+    "positions_fractional": [
+        [
+            0.5,
+            0.5,
+            0.5
+        ],
+        [
+            0.0,
+            0.5,
+            0.5
+        ],
+        [
+            0.5,
+            0.5,
+            0.0
+        ],
+        [
+            0.5,
+            0.0,
+            0.5
+        ],
+        [
+            0.26011859,
+            0.26011859,
+            0.26011859
+        ],
+        [
+            0.71964424,
+            0.26011859,
+            0.26011859
+        ],
+        [
+            0.26011859,
+            0.26011859,
+            0.71964424
+        ],
+        [
+            0.26011859,
+            0.71964424,
+            0.26011859
+        ],
+        [
+            0.28035576,
+            0.73988141,
+            0.73988141
+        ],
+        [
+            0.73988141,
+            0.73988141,
+            0.73988141
+        ],
+        [
+            0.73988141,
+            0.73988141,
+            0.28035576
+        ],
+        [
+            0.73988141,
+            0.28035576,
+            0.73988141
+        ],
+        [
+            0.125,
+            0.125,
+            0.125
+        ],
+        [
+            0.875,
+            0.875,
+            0.875
+        ]
+    ],
+    "stoichiometry": [
+        0.28571429,
+        0.57142857,
+        0.14285714
+    ],
+    "natoms": 14,
+    "volume_cell": 145.966,
+    "density": 6.11701,
+    "spacegroup": "Fd-3m #227,Fd-3m #227,Fd-3m #227",
+    "egap": 2.8548,
+    "spin_cell": 0.0,
+    "bader_net_charges": [
+        1.8203,
+        1.8204,
+        1.8019,
+        1.8204,
+        -1.1934,
+        -1.1934,
+        -1.2104,
+        -1.1934,
+        -1.1934,
+        -1.1934,
+        -1.2104,
+        -1.1934,
+        1.1591,
+        1.1592
+    ],
+    "bader_atomic_volumes": [
+        7.5988,
+        7.5983,
+        7.6085,
+        7.5983,
+        11.6492,
+        11.6492,
+        11.7726,
+        11.6492,
+        11.6492,
+        11.6492,
+        11.7726,
+        11.6492,
+        11.0615,
+        11.0602
+    ],
+    "local_features": [
+        {
+            "element": "Ga",
+            "coordination_number": 14,
+            "average_bond_length": 2.9299773954312456,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 14
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.8203,
+            "bader_atomic_volume": 7.5988
+        },
+        {
+            "element": "Ga",
+            "coordination_number": 14,
+            "average_bond_length": 2.92997740762689,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 14
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.8204,
+            "bader_atomic_volume": 7.5983
+        },
+        {
+            "element": "Ga",
+            "coordination_number": 14,
+            "average_bond_length": 2.929977407626891,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 14
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.8019,
+            "bader_atomic_volume": 7.6085
+        },
+        {
+            "element": "Ga",
+            "coordination_number": 14,
+            "average_bond_length": 2.9299774076268905,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 14
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.8204,
+            "bader_atomic_volume": 7.5983
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518457079923,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518507165907,
+            "neighbor_types": [
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Ga"
+            ],
+            "neighbor_type_counts": {
+                "Ga": 7,
+                "Zn": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518507165907,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.2104,
+            "bader_atomic_volume": 11.7726
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518507165907,
+            "neighbor_types": [
+                "Ga",
+                "Zn",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Ga": 7,
+                "Zn": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518507165903,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518457079923,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.20405185071659,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "Ga",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.2104,
+            "bader_atomic_volume": 11.7726
+        },
+        {
+            "element": "O",
+            "coordination_number": 17,
+            "average_bond_length": 3.2040518507165903,
+            "neighbor_types": [
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn",
+                "Ga",
+                "O",
+                "O",
+                "O",
+                "Ga",
+                "Zn",
+                "Ga",
+                "Zn",
+                "Zn",
+                "Zn",
+                "Ga",
+                "Ga",
+                "Zn"
+            ],
+            "neighbor_type_counts": {
+                "Zn": 7,
+                "Ga": 7,
+                "O": 3
+            },
+            "oxygen_fraction": 0.17647058823529413,
+            "bader_net_charge": -1.1934,
+            "bader_atomic_volume": 11.6492
+        },
+        {
+            "element": "Zn",
+            "coordination_number": 28,
+            "average_bond_length": 3.687374018154255,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 28
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.1591,
+            "bader_atomic_volume": 11.0615
+        },
+        {
+            "element": "Zn",
+            "coordination_number": 28,
+            "average_bond_length": 3.6873740181542556,
+            "neighbor_types": [
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O",
+                "O"
+            ],
+            "neighbor_type_counts": {
+                "O": 28
+            },
+            "oxygen_fraction": 1.0,
+            "bader_net_charge": 1.1592,
+            "bader_atomic_volume": 11.0602
+        }
+    ]
+}
