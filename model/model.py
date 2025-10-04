@@ -7,16 +7,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 from collections import Counter
 import joblib
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def load_aflow_data(data_dir="data"):
     """
     Load AFLOW JSON files and extract features for Hubbard U model.
-    
-    Parameters:
-        data_dir (str): Directory containing AFLOW JSON files.
-    
-    Returns:
-        pd.DataFrame: DataFrame with features and U values.
     """
     data_list = []
     
@@ -39,12 +35,12 @@ def load_aflow_data(data_dir="data"):
                 
                 species = data.get("species", [])
                 if len(u_values) != len(species):
-                    print(f"Warning: U values mismatch for {compound}: {u_values}, species: {species}")
+                    # print(f"Warning: U values mismatch for {compound}: {u_values}, species: {species}")
                     continue
                 
                 local_features = data.get("local_features", [])
                 if not local_features:
-                    print(f"Warning: No local features for {compound}")
+                    # print(f"Warning: No local features for {compound}")
                     continue
                 
                 for idx, local in enumerate(local_features):
@@ -60,10 +56,7 @@ def load_aflow_data(data_dir="data"):
                     neighbor_type_counts = local.get("neighbor_type_counts", {})
 
                     # --- BADGER FEATURES ---
-                    # Badger net charge approximation: q ~ CN / bond length
                     badger_net_charge = coordination_number / max(average_bond_length, 1e-6)
-
-                    # Badger atomic volume approximation: V_atom ~ volume_cell / N_atoms
                     n_atoms = len(species)
                     badger_atomic_volume = volume_cell / max(n_atoms, 1)
                     
@@ -93,25 +86,12 @@ def load_aflow_data(data_dir="data"):
     df = pd.DataFrame(data_list)
     neighbor_columns = [col for col in df.columns if col.startswith("neighbor_")]
     df[neighbor_columns] = df[neighbor_columns].fillna(0)
-    
     return df
 
 def train_hubbard_u_model(df):
     """
-    Train a Random Forest model to predict Hubbard U values and save it.
-    
-    Parameters:
-        df (pd.DataFrame): DataFrame with features and U values.
-    
-    Returns:
-        dict: Model, feature importances, and performance metrics.
+    Train a Random Forest model, save it, and generate result plots.
     """
-    if not df.empty:
-        print("Average bond length stats:")
-        print(df["average_bond_length"].describe())
-        print(f"Warning: Suspicious bond lengths (< 1.0 Å):")
-        print(df[df["average_bond_length"] < 1.0][["compound", "element", "average_bond_length"]])
-    
     df = df[df["U"] > 0].copy()
     df["average_bond_length"] = df["average_bond_length"].clip(upper=3.5)
     
@@ -129,9 +109,9 @@ def train_hubbard_u_model(df):
     
     X = X.fillna(0).replace([np.inf, -np.inf], 0)
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) # Zmieniono na 80/20
     
-    model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
+    model = RandomForestRegressor(n_estimators=5, max_depth=50,random_state=42, n_jobs=-1)
     model.fit(X_train, y_train)
     
     y_pred = model.predict(X_test)
@@ -146,7 +126,7 @@ def train_hubbard_u_model(df):
     print(f"MAE: {mae:.3f} eV")
     print(f"R²: {r2:.3f}")
     print("Feature importances:")
-    print(feature_importances)
+    print(feature_importances.head(10))
     
     df_test = X_test.copy()
     df_test["U_true"] = y_test
@@ -156,9 +136,37 @@ def train_hubbard_u_model(df):
     df_test.to_csv("predictions.csv", index=False)
     print("Saved predictions to 'predictions.csv'")
     
-    # Save the model
     joblib.dump(model, "hubbard_model.pkl")
     print("Saved model to 'hubbard_model.pkl'")
+
+    print("\nGenerating improved prediction plot...")
+
+    plt.figure(figsize=(10, 10)) 
+
+    sns.scatterplot(data=df_test, x="U_true", y="U_pred", alpha=0.5, s=40, edgecolor='k', linewidth=0.5)
+    
+
+    plt.xlabel("Rzeczywiste U [eV]", fontsize=14)
+    plt.ylabel("Przewidywane U [eV]", fontsize=14)
+    plt.title("Porównanie Wartości Rzeczywistych i Przewidywanych", fontsize=18, weight='bold')
+
+
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
+    
+   
+    max_val = max(df_test["U_true"].max(), df_test["U_pred"].max())
+    min_val = min(df_test["U_true"].min(), df_test["U_pred"].min())
+    plt.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2.5, label="Idealna predykcja")
+
+    plt.legend(fontsize=12)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    
+
+    plt.savefig("predictions_scatter_plot.png", dpi=300, bbox_inches='tight')
+    print("Saved improved plot to 'predictions_scatter_plot.png'")
+    
+
     
     return {
         "model": model,
@@ -180,9 +188,9 @@ def main():
     result = train_hubbard_u_model(df)
     
     if result:
-        print("Model training completed successfully")
+        print("\nModel training completed successfully.")
     else:
-        print("Model training failed")
+        print("\nModel training failed.")
 
 if __name__ == "__main__":
     main()
