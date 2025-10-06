@@ -9,7 +9,7 @@ import threading
 from ase import Atoms
 from ase.neighborlist import neighbor_list
 
-progress_lock = threading.Lock()  
+progress_lock = threading.Lock()
 
 def calculate_local_features(data):
     """
@@ -59,9 +59,6 @@ def calculate_local_features(data):
         if isinstance(natoms, str):
             natoms = int(float(natoms))
         
-
-
-
         # Calculate total atoms
         total_atoms = natoms if natoms > 0 else len(positions)
         if stoichiometry and len(stoichiometry) == len(species):
@@ -225,7 +222,6 @@ def get_structure_info(data):
         elif isinstance(bader_atomic_volumes, list):
             bader_atomic_volumes = [float(v) for v in bader_atomic_volumes if v not in ("", None)]
 
-
         structure_dict = {
             "compound": data.get('compound', 'Unknown'),
             "ldau": data.get("ldau_u", ""),
@@ -255,7 +251,7 @@ def fetch_aflow_data(uid, structure, output_dir="data", aflow_url="http://aflowl
     output_file = os.path.join(output_dir, f"aflow_data_{uid.replace('/', '_')}_{structure}.json")
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=60) 
         response.raise_for_status()
         data = response.json()
 
@@ -325,7 +321,7 @@ def fetch_and_process_aflow_entries(url, aflow_uid, aflow_url="http://aflowlib.d
     Fetch the list of entries for a given UID and process oxygen-containing structures.
     """
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=60) 
         response.raise_for_status()
         data = response.json()
 
@@ -351,39 +347,47 @@ def fetch_and_process_aflow_entries(url, aflow_uid, aflow_url="http://aflowlib.d
         print(f"Error fetching entries from {url}: {e}")
     except json.JSONDecodeError:
         print(f"Failed to decode JSON from response: {url}")
+
+def count_structures_to_download(subdirs, aflow_url="http://aflowlib.duke.edu"):
     """
-    Fetch the list of entries for a given UID and process oxygen-containing structures.
+    Counts the total number of oxygen-containing structures to be downloaded from all subdirectories.
     """
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
-
-        raw_entries = data.get("aflowlib_entries", {})
-        if not isinstance(raw_entries, dict):
-            print("Unexpected format in 'aflowlib_entries'")
-            return
-
-        structures = list(raw_entries.values())
-        print(f"Found {len(structures)} AFLOW structures to process.")
-
-        o_structures = [s for s in structures if "O" in s]
-        print(f"Number of structures containing 'O': {len(o_structures)}")
-        print(f"Processing {len(o_structures)} structures containing 'O'.")
-
-        if not o_structures:
-            print("No structures containing 'O' found.")
-            return
-
-        fetch_aflow_data_batch([aflow_uid], o_structures, aflow_url)
-
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching entries from {url}: {e}")
-    except json.JSONDecodeError:
-        print(f"Failed to decode JSON from response: {url}")
+    total_count = 0
+    print("Calculating total number of structures to download...")
+    for sub in subdirs:
+        aflow_uid = f"ICSD_WEB/{sub}"
+        full_url = f"{aflow_url}/AFLOWDATA/{aflow_uid}/?format=json"
+        try:
+            response = requests.get(full_url, timeout=60)
+            response.raise_for_status()
+            data = response.json()
+            raw_entries = data.get("aflowlib_entries", {})
+            if isinstance(raw_entries, dict):
+                structures = list(raw_entries.values())
+                o_structures = [s for s in structures if "O" in s]
+                total_count += len(o_structures)
+                print(f"Found {len(o_structures)} 'O' structures in {aflow_uid}")
+        except requests.exceptions.RequestException as e:
+            print(f"Could not fetch data for {aflow_uid}: {e}")
+        except json.JSONDecodeError:
+            print(f"Failed to decode JSON for {aflow_uid}")
+    return total_count
 
 if __name__ == "__main__":
     aflow_url = "http://aflowlib.duke.edu"
-    aflow_uid = "ICSD_WEB/FCC"
-    full_url = f"{aflow_url}/AFLOWDATA/{aflow_uid}/?format=json"
-    fetch_and_process_aflow_entries(full_url, aflow_uid, aflow_url)
+
+    # wszystkie „systemy” z ICSD_WEB 
+    subdirs = ["BCC","BCT","CUB","FCC","HEX","MCL","MCLC",
+               "ORC","ORCC","ORCF","ORCI","RHL","TET","TRI"]
+
+    # total_to_download = count_structures_to_download(subdirs, aflow_url)
+    # print(f"\nTotal number of oxygen-containing structures to download: {total_to_download}\n")
+
+    for sub in subdirs:
+        aflow_uid = f"ICSD_WEB/{sub}"
+        full_url  = f"{aflow_url}/AFLOWDATA/{aflow_uid}/?format=json"
+        print(f"\n=== Processing {aflow_uid} ===")
+        try:
+            fetch_and_process_aflow_entries(full_url, aflow_uid, aflow_url)
+        except Exception as e:
+            print(f"[WARN] Skipping {aflow_uid} due to: {e}")

@@ -4,6 +4,7 @@ import os
 from collections import Counter
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 def load_species(data_dir="data"):
     """
@@ -94,6 +95,16 @@ def plot_species_counts(df, top_n=10):
     species = df_plot['species'].tolist()
     counts = df_plot['count'].tolist()
     
+    plt.figure(figsize=(12, 8))
+    plt.bar(species, counts, color='skyblue')
+    plt.xlabel('Pierwiastek', fontsize=12)
+    plt.ylabel('Liczba wystąpień w związkach', fontsize=12)
+    plt.title(f'Top {top_n} najczęściej występujących pierwiastków (poza tlenem)', fontsize=14)
+    plt.xticks(rotation=45)
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.savefig("species_distribution.png")
+    print("\nSaved species distribution plot to 'species_distribution.png'")
 
 
 def main():
